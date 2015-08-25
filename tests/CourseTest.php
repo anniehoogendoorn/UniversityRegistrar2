@@ -122,6 +122,45 @@
             //Assert
             $this->assertEquals("Advanced Coding", $test_course->getName());
         }
+
+        function testDeleteCourse()
+        {
+            $name = "Coding 101";
+            $id = 1;
+            $test_course = new Course($name);
+            $test_course->save();
+
+            $name2= "Advanced Coding";
+            $id2 = 2;
+            $test_course2 = new Course($name2);
+            $test_course2->save();
+
+            $test_course->delete();
+
+            $this->assertEquals([$test_course2], Course::getAll());
+        }
+
+        function testFind()
+        {
+            //Arrange
+            $name = "Coding 101";
+            $id = 1;
+            $test_course = new Course($name, $id);
+            $test_course->save();
+
+            $name2 = "Advanced Coding";
+            $id2 = 2;
+            $test_course2 = new Course($name2, $id2);
+            $test_course2->save();
+
+            //Act
+            $result = Course::find($test_course->getId());
+
+            //Assert
+            $this->assertEquals($test_course, $result);
+        }
+
+
     }
 
 ?>
