@@ -6,7 +6,7 @@
 
     require_once "src/Student.php";
     require_once "src/Course.php";
-    $server = "mysql:host=localhost;dbname=test_university_registrar";
+    $server = "mysql:host=localhost;dbname=university_registrar_test";
     $username = "root";
     $password = "root";
     $DB = new PDO($server, $username, $password);
@@ -127,11 +127,12 @@
             $id2= null;
             $course_id2 = $test_course->getId();
             $test_student2 = new Student ($student_name2, $id2, $enrollment_date, $course_id2);
-            $test_student->save();
+            $test_student2->save();
 
             $result = Student::getAll();
+            var_dump($result);
 
-            $this->assertEquals(['test_student, $test_student2'], $result);
+            $this->assertEquals([$test_student, $test_student2], $result);
         }
 
     }

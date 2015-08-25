@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <title>University Registrar</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Courses</h1>
+            {% if courses is not empty %}
+                <p>Here are all your courses:</p>
+                <ul>
+                <li><a href="/courses/{{ course.getId }}">{{ course.getName }}</a></li>
+            {% endfor %}
+                <ul>
+            {% endif %}
+
+            <form action="/courses" method="post">
+                <label for="name">Course Name</label>
+                <input id="name" name="name" type="text">
+
+                <button class="btn btn-info" type="submit">Add Course</button>
+            </form>
+            <form action="/delete_courses" method="post">
+                <button class="btn btn-danger" type="submit">Clear</button>
+            </form>
+            <br/>
+            <p><a class="btn btn-default" href='/'>Home</a></p>
+        </div>    
+    </body>
+</html>

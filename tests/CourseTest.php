@@ -9,7 +9,7 @@
 
     require_once "src/Course.php";
     // require_once "src/Student.php";
-    $server = 'mysql:host=localhost;dbname=test_university_registrar';
+    $server = 'mysql:host=localhost;dbname=university_registrar_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -18,7 +18,7 @@
     {
         protected function tearDown() {
             Course::deleteAll();
-            // Student::deleteAll();
+            Student::deleteAll();
         }
 
         function testGetName()
