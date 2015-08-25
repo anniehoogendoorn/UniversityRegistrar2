@@ -22,13 +22,14 @@
         function testGetStudentName()
         {
             $name = "Coding 101";
+            $enrollment_date = '0000-00-00';
             $id = null;
             $test_course = new Course($name, $id);
             $test_course->save();
 
             $student_name = "Aladdin";
             $course_id = $test_course->getId();
-            $test_student = new Student ($student_name, $id, $course_id);
+            $test_student = new Student ($student_name, $id, $enrollment_date, $course_id);
 
             $result = $test_student->getStudentName();
 
@@ -39,13 +40,14 @@
         {
             //Arrange
             $name = "Coding 101";
+            $enrollment_date = '0000-00-00';
             $id = null;
             $test_course = new Course($name, $id);
             $test_course->save();
 
             $student_name = "Aladdin";
             $course_id = $test_course->getId();
-            $test_course = new Student ($student_name, $id, $course_id);
+            $test_course = new Student ($student_name, $id, $enrollment_date, $course_id);
 
             //Act
             $test_course->setStudentName("Jafar");
@@ -55,9 +57,40 @@
             $this->assertEquals("Jafar", $result);
         }
 
+        function testGetId()
+        {
+            $name = "Coding 101";
+            $enrollment_date = '0000-00-00';
+            $id = 1;
+            $test_course = new Course($name, $id);
+            $test_course->save();
 
+            $student_name = "Aladdin";
+            $course_id = $test_course->getId();
+            $test_student = new Student ($student_name, $id, $enrollment_date, $course_id);
 
+            $result = $test_student->getId();
 
+            $this->assertEquals(1, $result);
+        }
+
+        function testSave()
+        {
+            $name = "Coding 101";
+            $enrollment_date = '0000-00-00';
+            $id = null;
+            $test_course = new Course($name, $id);
+            $test_course->save();
+
+            $student_name = "Aladdin";
+            $course_id = $test_course->getId();
+            $test_student = new Student ($student_name, $id, $enrollment_date, $course_id);
+
+            $test_student->save();
+
+            $result = Student::getAll();
+            $this->assertEquals($test_student, $result[0]);
+        }
 
     }
 
