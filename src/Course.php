@@ -28,8 +28,8 @@
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO courses (name) VALUES ('{$this->getName()}');");
-            $this->id = $GLOBALS['DB']->lastInsertId();
-        }
+           $this->id = $GLOBALS['DB']->lastInsertId();
+       }
 
         static function getAll()
         {
@@ -42,6 +42,17 @@
                 array_push($courses, $new_course);
             }
             return $courses;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM courses;");
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE courses SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
         }
     }
 
