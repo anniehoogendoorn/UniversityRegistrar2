@@ -74,6 +74,23 @@
             $this->assertEquals(1, $result);
         }
 
+        function test_getCategoryId() {
+            $name = "Coding 101";
+            $enrollment_date = '0000-00-00';
+            $id = null;
+            $test_course = new Course($name, $id);
+            $test_course->save();
+
+            $student_name = "Aladdin";
+            $course_id = $test_course->getId();
+            $test_student = new Student($student_name, $id, $enrollment_date, $course_id);
+            $test_student->save();
+
+            $result = $test_student->getCourseId();
+
+            $this->assertEquals(true, is_numeric($result));
+        }
+
         function testSave()
         {
             $name = "Coding 101";
@@ -92,6 +109,7 @@
             $this->assertEquals($test_student, $result[0]);
         }
 
+        //Failing!!
         function test_GetAll()
         {
             $name = "Coding 101";
